@@ -1,0 +1,5 @@
+- Replaced the Settings dialog with a dedicated Settings screen and improved dark theme contrast
+- Dedicated Quick Guide screen preserving the system navigation bar, plus a new About screen
+- Trigger haptic/sound feedback on key press (and logo tap) while registering keys on release
+- Fixed launcher icon disappearing when switching calculator modes across profiles
+- Updated target SDK to 37 (Android 17)
