@@ -439,11 +439,6 @@ public class KeypadInput {
             if (currentKeyState == KeyState.PRESSED || currentKeyState == KeyState.RELEASED) {
                 Paint paint = new Paint();
                 RectF highlightRect = new RectF(KeypadInput.this.highlightedKeyBounds);
-                if (!KeypadInput.this.calculatorActivity.isLandscape()
-                        && KeypadInput.this.calculatorActivity.getCalculatorMode() == CalculatorMode.CC_12C) {
-                    highlightRect.top += 5.0f;
-                    highlightRect.bottom -= 5.0f;
-                }
                 if (currentKeyState == KeyState.PRESSED) {
                     paint.setColor(Color.argb(180, 38, 38, 38));
                 } else {
@@ -590,33 +585,66 @@ public class KeypadInput {
         }
     }
 
+    private Rect scaleProportionalRect(
+            int left, int top, int right, int bottom, int refWidth, int refHeight) {
+        return new Rect(
+                Math.round((this.scaledLayoutWidth * left) / (float) refWidth),
+                Math.round((this.scaledLayoutHeight * top) / (float) refHeight),
+                Math.round((this.scaledLayoutWidth * right) / (float) refWidth),
+                Math.round((this.scaledLayoutHeight * bottom) / (float) refHeight));
+    }
+
     private void initializeKeyBounds12C() {
         if (!this.calculatorActivity.isLandscape()) {
-            this.portraitLogoRect = scaleRect(270, 0, 310, 70);
-            this.portraitKeyRects[5] = scaleRect(194, 388, 247, 449);
-            this.portraitKeyRects[6] = scaleRect(73, 189, 126, 250);
-            this.portraitKeyRects[7] = scaleRect(134, 189, 187, 250);
-            this.portraitKeyRects[8] = scaleRect(194, 189, 247, 250);
-            this.portraitKeyRects[9] = scaleRect(255, 189, 308, 250);
-            this.portraitKeyRects[10] = scaleRect(194, 122, 247, 183);
-            this.portraitKeyRects[11] = scaleRect(134, 122, 187, 183);
-            this.portraitKeyRects[16] = scaleRect(73, 256, 126, 317);
-            this.portraitKeyRects[17] = scaleRect(134, 256, 187, 317);
-            this.portraitKeyRects[18] = scaleRect(194, 256, 247, 317);
-            this.portraitKeyRects[19] = scaleRect(255, 256, 308, 317);
-            this.portraitKeyRects[22] = scaleRect(13, 256, 66, 317);
-            this.portraitKeyRects[23] = scaleRect(13, 189, 66, 250);
-            this.portraitKeyRects[24] = scaleRect(255, 122, 308, 183);
-            this.portraitKeyRects[25] = scaleRect(13, 322, 66, 451);
-            this.portraitKeyRects[26] = scaleRect(73, 322, 126, 383);
-            this.portraitKeyRects[27] = scaleRect(134, 322, 187, 383);
-            this.portraitKeyRects[28] = scaleRect(194, 322, 247, 383);
-            this.portraitKeyRects[29] = scaleRect(255, 322, 308, 383);
-            this.portraitKeyRects[33] = scaleRect(13, 122, 66, 183);
-            this.portraitKeyRects[34] = scaleRect(73, 122, 126, 183);
-            this.portraitKeyRects[36] = scaleRect(73, 388, 126, 449);
-            this.portraitKeyRects[37] = scaleRect(134, 388, 187, 449);
-            this.portraitKeyRects[39] = scaleRect(255, 388, 308, 449);
+            final int refW = 960;
+            final int refH = 1800;
+            this.portraitLogoRect = scaleProportionalRect(805, 45, 923, 180, refW, refH);
+
+            int[][] topCols = {
+                    {70, 215}, {238, 382}, {405, 550}, {573, 718}, {741, 886}
+            };
+            int[][] topRows = {
+                    {305, 433},
+                    {498, 626},
+                    {690, 818},
+                    {857, 985}
+            };
+            int[] topRowBaseKeys = {0, 10, 20, 30};
+            for (int row = 0; row < topRows.length; row++) {
+                int yTop = topRows[row][0];
+                int yBot = topRows[row][1];
+                int baseKey = topRowBaseKeys[row];
+                for (int col = 0; col < topCols.length; col++) {
+                    this.portraitKeyRects[baseKey + col] = scaleProportionalRect(
+                            topCols[col][0], yTop, topCols[col][1], yBot, refW, refH);
+                }
+            }
+
+            int[][] bottomCols = {
+                    {69, 214}, {237, 382}, {405, 550}, {577, 721}, {740, 885}
+            };
+            int[][] bottomRows = {
+                    {1039, 1167},
+                    {1207, 1335},
+                    {1387, 1515},
+                    {1579, 1707}
+            };
+            int[] bottomRowBaseKeys = {5, 15, 25, 35};
+            for (int row = 0; row < bottomRows.length; row++) {
+                int yTop = bottomRows[row][0];
+                int yBot = bottomRows[row][1];
+                int baseKey = bottomRowBaseKeys[row];
+                for (int col = 0; col < bottomCols.length; col++) {
+                    int keyIndex = baseKey + col;
+                    if (keyIndex == 25) {
+                        this.portraitKeyRects[25] = scaleProportionalRect(
+                                bottomCols[0][0], bottomRows[2][0], bottomCols[0][1], bottomRows[3][1], refW, refH);
+                    } else if (keyIndex != 35) {
+                        this.portraitKeyRects[keyIndex] = scaleProportionalRect(
+                                bottomCols[col][0], yTop, bottomCols[col][1], yBot, refW, refH);
+                    }
+                }
+            }
         } else {
             initializeStandard40KeyLandscapeBounds();
         }
@@ -794,17 +822,6 @@ public class KeypadInput {
                 this.calculatorActivity.getCalculationThread().enqueueKey(9);
                 updateLayoutDimensions();
                 break;
-            case 10:
-                if (mode == CalculatorMode.CC_12C && !this.calculatorActivity.isLandscape()) {
-                    this.calculatorActivity.getCalculationThread().enqueueKey(32);
-                    this.calculatorActivity.keyPressed(32, false);
-                    synchronized (this.calculatorActivity.getCalculationThread()) {
-                        this.calculatorActivity.getCalculationThread().notify();
-                    }
-                    this.calculatorActivity.keyPressed(32, true);
-                }
-                this.calculatorActivity.getCalculationThread().enqueueKey(10);
-                break;
             case 30:
             case 35:
                 break;
@@ -850,7 +867,7 @@ public class KeypadInput {
             this.calculatorActivity.keyPressed(keyIndex, true);
             return;
         }
-        if (isTouchInside(this.landscapeKeyRects[30])) {
+        if (isTouchInside(getActiveKeyRect(30))) {
             this.calculatorActivity.finish();
         }
     }

@@ -229,18 +229,21 @@ public class Calculator extends Activity {
 
     private void updateLcdMargins(View lcdView) {
         int leftMargin;
-        int baseTopMargin;
+        int topMargin;
         if (lcdView.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
             ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) lcdView.getLayoutParams();
             boolean is12CP = this.calculatorMode == CalculatorMode.CC_12CP;
             if (isLandscape()) {
                 leftMargin = scaleLeftMargin(is12CP ? 85 : 69);
-                baseTopMargin = 7;
+                topMargin = scaleTopMargin(7);
+            } else if (this.calculatorMode == CalculatorMode.CC_12C) {
+                leftMargin = scaleLeftMargin(22);
+                topMargin = scaleLeftMargin(5);
             } else {
                 leftMargin = scaleLeftMargin(is12CP ? 16 : 14);
-                baseTopMargin = is12CP ? 20 : 17;
+                topMargin = scaleTopMargin(is12CP ? 20 : 17);
             }
-            marginLayoutParams.setMargins(leftMargin, scaleTopMargin(baseTopMargin), 0, 0);
+            marginLayoutParams.setMargins(leftMargin, topMargin, 0, 0);
             lcdView.requestLayout();
         }
     }

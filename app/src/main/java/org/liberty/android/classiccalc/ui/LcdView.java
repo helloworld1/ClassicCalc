@@ -104,6 +104,11 @@ public class LcdView extends View {
         if (metrics.densityDpi == 0) {
             return 0;
         }
+        if (this.calculatorActivity != null
+                && !this.calculatorActivity.isLandscape()
+                && this.calculatorActivity.getCalculatorMode() == CalculatorMode.CC_12C) {
+            return scaleHorizontal(value);
+        }
         float density = metrics.density;
         float densityDpi = metrics.densityDpi;
         double baseHeightDp = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ? 320 - this.statusBarHeightDp : 480 - this.statusBarHeightDp;
@@ -270,15 +275,15 @@ public class LcdView extends View {
         } else {
             int adjustedIndicatorBaseY = indicatorBaseYOffset - 2;
             this.indicatorPoints[0].set(scaleHorizontal(4), scaleVertical(this.portraitVerticalOffset + 30));
-            this.indicatorPoints[1].set(3, scaleVertical(this.portraitVerticalOffset + 20));
+            this.indicatorPoints[1].set(scaleHorizontal(4), scaleVertical(this.portraitVerticalOffset + 20));
             int portraitIndicatorRowY = adjustedIndicatorBaseY + 39;
             this.indicatorPoints[2].set(scaleHorizontal(23), scaleVertical(portraitIndicatorRowY));
             this.indicatorPoints[3].set(scaleHorizontal(46), scaleVertical(portraitIndicatorRowY));
             int shiftIndicatorRowY = adjustedIndicatorBaseY + 40;
-            this.indicatorPoints[4].set(scaleHorizontal(79), scaleVertical(shiftIndicatorRowY));
-            this.indicatorPoints[5].set(scaleHorizontal(95), scaleVertical(shiftIndicatorRowY));
-            this.indicatorPoints[6].set(scaleHorizontal(100), scaleVertical(portraitIndicatorRowY));
-            this.indicatorPoints[7].set(scaleHorizontal(130), scaleVertical(portraitIndicatorRowY));
+            this.indicatorPoints[4].set(scaleHorizontal(72), scaleVertical(shiftIndicatorRowY));
+            this.indicatorPoints[5].set(scaleHorizontal(94), scaleVertical(shiftIndicatorRowY));
+            this.indicatorPoints[6].set(scaleHorizontal(128), scaleVertical(portraitIndicatorRowY));
+            this.indicatorPoints[7].set(scaleHorizontal(138), scaleVertical(portraitIndicatorRowY));
             this.indicatorPoints[8].set(scaleHorizontal(165), scaleVertical(portraitIndicatorRowY));
             this.indicatorPoints[9].set(scaleHorizontal(195), scaleVertical(portraitIndicatorRowY));
             prgmIndicatorPoint = this.indicatorPoints[10];
