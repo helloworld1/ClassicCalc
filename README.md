@@ -1,10 +1,38 @@
 # Classic Calc
 
+![Classic Calc Feature Graphic](arts/feature_graphic.png)
+
 **Classic Calc** (`org.liberty.android.classiccalc`) is an Android calculator application that faithfully reproduces three classic Voyager-series financial and scientific calculators in a single pure-Java Android app:
 
 - **CC 12C Financial** — Classic RPN financial calculator
 - **CC 12C Platinum** — Enhanced financial calculator supporting both **RPN** and **Algebraic (ALG)** operating modes, expanded memory, and additional functions
 - **CC 15C Scientific** — Advanced RPN scientific programmable calculator
+
+---
+
+## Screenshots
+
+### Portrait Layouts (Full 39-Key Faceplates)
+
+| CC 12C Financial (TVM) | CC 12C Platinum (ALG & `( )`) | CC 15C Scientific (`RAD` & $\pi$) |
+| :---: | :---: | :---: |
+| [![CC 12C Portrait](arts/01_12c_portrait_tvm.png)](arts/01_12c_portrait_tvm.png) | [![CC 12C Platinum Portrait](arts/03_12cp_portrait_alg.png)](arts/03_12cp_portrait_alg.png) | [![CC 15C Portrait](arts/05_15c_portrait_scientific.png)](arts/05_15c_portrait_scientific.png) |
+
+### Landscape Layouts (Classic Voyager Faceplates)
+
+| CC 12C Financial (`NPV` Cash Flow) | CC 12C Platinum (`RPN` & `BEGIN`) |
+| :---: | :---: |
+| [![CC 12C Landscape](arts/02_12c_landscape.png)](arts/02_12c_landscape.png) | [![CC 12C Platinum Landscape](arts/04_12cp_landscape_rpn.png)](arts/04_12cp_landscape_rpn.png) |
+
+| CC 15C Scientific (Complex Mode `C`) |
+| :---: |
+| [![CC 15C Landscape](arts/06_15c_landscape_complex.png)](arts/06_15c_landscape_complex.png) |
+
+### Quick Guide & Settings
+
+| Quick Guide Reference Plate | Settings |
+| :---: | :---: |
+| [![Quick Guide](arts/07_quick_guide.png)](arts/07_quick_guide.png) | [![Settings](arts/08_settings.png)](arts/08_settings.png) |
 
 ---
 
@@ -36,25 +64,26 @@
 
 ## User Interface & Controls
 
-- **Portrait & Landscape Layouts**: Dedicated high-resolution keypad layouts for both portrait and landscape orientations in each calculator mode.
-- **Interactive LCD**: Custom 7-segment LCD rendering (`fonts/calc_font.ttf`) with active status annunciators (`-`, `*`/`|`, `USER`/`RPN`/`ALG`, `f`, `g`, `BEGIN`, `G`/`RAD`, `D.MY`, `C`, `PRGM`).
-- **Dynamic Launcher Icon & Title**: Automatically updates the app launcher icon and label to match the selected calculator mode (`CC 12C Financial`, `CC 12C Platinum`, or `CC 15C Scientific`).
+- **Full-Function Portrait & Landscape Layouts**: Dedicated high-resolution 39-key faceplates in both portrait (top/bottom split) and classic Voyager landscape orientations across all three calculator modes.
+- **Interactive LCD**: Custom 7-segment LCD rendering (`fonts/calc_font.ttf`) with active status annunciators (`-`, `*`/`|`, `USER`/`RPN`/`ALG`, `( )`, `f`, `g`, `BEGIN`, `G`/`RAD`, `D.MY`, `C`, `PRGM`).
+- **Dynamic Launcher Icon**: Automatically updates the app launcher icon to match the selected calculator mode (`12C`, `12C Platinum`, or `15C`).
 - **Automatic State Persistence**: Stack contents, financial registers, storage registers, modes, and programs are automatically saved on pause/exit and restored on launch for each calculator mode independently.
 
 ---
 
 ## Settings
 
-Accessible by tapping the **CLASSIC.CALC** logo or pressing the system Menu button:
+Accessible by tapping the **CC** badge at the top right of the calculator faceplate:
 
-- **Calculator Mode**: Switch seamlessly between **CC 12C Financial**, **CC 12C Platinum**, and **CC 15C Scientific**.
+- **Calculator Mode**: Switch seamlessly between **12C**, **12C Platinum**, and **15C**.
 - **Quick Guide**: View the built-in quick reference back-cover plate for the active calculator mode.
-- **Swap `.` and `,`**: Toggle the decimal point and thousands separator between US (`1,234.56`) and European (`1.234,56`) formats.
-- **Key Click Sound**: Enable or disable audible key click feedback (`keypress.wav`).
-- **Haptic Feedback**: Enable or disable vibration on key press.
-- **Lock Orientation**: Auto-rotate with sensor, lock to current orientation, or force portrait/landscape.
 - **Always on**: Keep the screen awake while the calculator is open (default off).
+- **Sound**: Enable or disable audible key click feedback on key press.
+- **Vibration**: Configure haptic feedback intensity on key press (`Off`, `Low`, `Medium`, `High`).
+- **Orientation**: Auto-rotate with sensor or lock to current orientation.
+- **Swap Decimal Separator**: Toggle the decimal point and thousands separator between US (`1,234.56`) and European (`1.234,56`) formats.
 - **Reset Calculator**: Clear and reset the active calculator's memory to factory defaults.
+- **About Classic Calc**: View version details and project repository link.
 
 ---
 
