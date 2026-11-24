@@ -6,8 +6,8 @@ Calculator Modes:
 - CC 15C Scientific: Full RPN scientific programmable calculator with trigonometric and hyperbolic functions (DEG/RAD/GRD), complex numbers, matrix operations, numerical SOLVE and integration, factorials, permutations, combinations, random numbers, and full keystroke programmability (LBL, GSB, RTN, flags, ISG/DSE, indirect addressing)
 
 Features:
-- Custom 7-segment LCD display with authentic status annunciators (RPN, ALG, f, g, BEGIN, G/RAD, D.MY, C, PRGM)
-- Portrait and landscape layouts for every calculator mode
+- Custom 7-segment LCD display with authentic status annunciators (RPN, ALG, ( ), f, g, BEGIN, G/RAD, D.MY, C, PRGM)
+- Full-function 39-key portrait and landscape layouts for every calculator mode
 - Built-in Quick Guide reference plate for each calculator
 - Dynamic launcher icon and state persistence across calculator modes
 - Configurable key click sound, vibration strength, orientation mode (Auto, Lock Landscape, System), Always on screen toggle, and US/European decimal separator swap

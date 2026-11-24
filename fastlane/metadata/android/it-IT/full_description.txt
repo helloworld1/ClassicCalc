@@ -7,7 +7,7 @@ Modalità calcolatrice:
 
 Funzionalità:
 - Display LCD personalizzato a 7 segmenti con indicatori di stato autentici (RPN, ALG, f, g, BEGIN, G/RAD, D.MY, C, PRGM)
-- Layout dedicati in verticale e orizzontale per ogni calcolatrice
+- Layout completi a 39 tasti in verticale e orizzontale per ogni calcolatrice
 - Guida rapida integrata con la scheda di riferimento posteriore di ciascun modello
 - Icona del launcher dinamica in base alla modalità attiva e salvataggio automatico dello stato
 - Suono dei tasti configurabile, intensità della vibrazione, orientamento (Auto, Blocca orizzontale, Sistema), interruttore Sempre attivo e scambio del separatore decimale

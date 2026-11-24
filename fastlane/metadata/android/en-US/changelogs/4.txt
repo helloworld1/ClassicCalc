@@ -1,0 +1,3 @@
+- Redesigned portrait mode across CC 12C, CC 12C Platinum, and CC 15C with full 39-key functionality (original left half on top, right half on bottom)
+- Unified portrait faceplate styling, brushed metallic bezels, orange/blue shift legends, and group brackets to match landscape mode
+- Improved portrait LCD digit and status annunciator alignment across all calculator modes

@@ -7,7 +7,7 @@ Rekenmachinemodi:
 
 Functies:
 - Aangepast 7-segments LCD-scherm met authentieke statusindicatoren (RPN, ALG, f, g, BEGIN, G/RAD, D.MY, C, PRGM)
-- Specifieke staande en liggende toetsindelingen voor elke rekenmachinemodus
+- Volwaardige 39-toetsenindelingen in zowel staande als liggende stand voor elke rekenmachinemodus
 - Ingebouwde snelstartgids met de referentieplaat voor elk model
 - Dynamisch startpictogram dat overeenkomt met de actieve modus en automatisch opslaan van de status
 - Instelbaar toetsklikgeluid, trillingssterkte, schermstand (Automatisch, Liggend vergrendelen, Systeem), Altijd aan-schakelaar en wisselen van decimaalteken

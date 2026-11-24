@@ -7,7 +7,7 @@ Modes de calculatrice :
 
 Fonctionnalités :
 - Écran LCD personnalisé à 7 segments avec indicateurs d'état fidèles (RPN, ALG, f, g, BEGIN, G/RAD, D.MY, C, PRGM)
-- Agencements dédiés en mode portrait et paysage pour chaque calculatrice
+- Agencements complets à 39 touches en mode portrait et paysage pour chaque calculatrice
 - Guide rapide intégré affichant la plaque de référence de chaque modèle
 - Icône du lanceur dynamique adaptée au mode actif et sauvegarde automatique de l'état
 - Clic sonore des touches, intensité du vibreur réglable, orientation (Auto, Verrouiller en paysage, Système), option Toujours allumé et permutation du séparateur décimal

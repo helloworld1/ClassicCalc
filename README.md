@@ -64,7 +64,8 @@
 
 ## User Interface & Controls
 
-- **Full-Function Portrait & Landscape Layouts**: Dedicated high-resolution 39-key faceplates in both portrait (top/bottom split) and classic Voyager landscape orientations across all three calculator modes.
+- **Full-Function Portrait & Landscape Layouts**: Dedicated high-resolution 39-key faceplates in both portrait (top/bottom 5×4 split) and classic Voyager landscape (10×4) orientations across all three calculator modes.
+- **Tactile Key Response**: Plays audio/haptic feedback immediately on key press (and **CC** badge tap) while registering keystrokes cleanly on key release.
 - **Interactive LCD**: Custom 7-segment LCD rendering (`fonts/calc_font.ttf`) with active status annunciators (`-`, `*`/`|`, `USER`/`RPN`/`ALG`, `( )`, `f`, `g`, `BEGIN`, `G`/`RAD`, `D.MY`, `C`, `PRGM`).
 - **Dynamic Launcher Icon**: Automatically updates the app launcher icon to match the selected calculator mode (`12C`, `12C Platinum`, or `15C`).
 - **Automatic State Persistence**: Stack contents, financial registers, storage registers, modes, and programs are automatically saved on pause/exit and restored on launch for each calculator mode independently.
@@ -80,7 +81,7 @@ Accessible by tapping the **CC** badge at the top right of the calculator facepl
 - **Always on**: Keep the screen awake while the calculator is open (default off).
 - **Sound**: Enable or disable audible key click feedback on key press.
 - **Vibration**: Configure haptic feedback intensity on key press (`Off`, `Low`, `Medium`, `High`).
-- **Orientation**: Auto-rotate with sensor or lock to current orientation.
+- **Orientation**: Choose between `Auto` (full sensor), `Lock Landscape`, or `System`.
 - **Swap Decimal Separator**: Toggle the decimal point and thousands separator between US (`1,234.56`) and European (`1.234,56`) formats.
 - **Reset Calculator**: Clear and reset the active calculator's memory to factory defaults.
 - **About Classic Calc**: View version details and project repository link.

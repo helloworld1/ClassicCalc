@@ -7,7 +7,7 @@ Modos de calculadora:
 
 Características:
 - Pantalla LCD personalizada de 7 segmentos con indicadores de estado auténticos (RPN, ALG, f, g, BEGIN, G/RAD, D.MY, C, PRGM)
-- Diseños específicos en orientación vertical y horizontal para cada calculadora
+- Diseños completos de 39 teclas en orientación vertical y horizontal para cada calculadora
 - Guía rápida integrada con la placa de referencia trasera de cada modelo
 - Icono del lanzador dinámico según el modo activo y guardado automático del estado
 - Sonido de clic al pulsar teclas, intensidad de vibración ajustable, control de orientación (Automática, Bloquear horizontal, Sistema), interruptor de pantalla siempre activa e intercambio de separador decimal (EE. UU./Europa)

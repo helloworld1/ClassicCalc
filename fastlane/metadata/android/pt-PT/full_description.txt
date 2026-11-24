@@ -7,7 +7,7 @@ Modos de calculadora:
 
 Funcionalidades:
 - Ecrã LCD personalizado de 7 segmentos com indicadores de estado autênticos (RPN, ALG, f, g, BEGIN, G/RAD, D.MY, C, PRGM)
-- Disposições dedicadas em retrato e paisagem para cada modo de calculadora
+- Disposições completas de 39 teclas em retrato e paisagem para cada modo de calculadora
 - Guia rápido integrado com a placa de referência traseira de cada modelo
 - Ícone dinâmico do iniciador correspondente ao modo ativo e gravação automática do estado
 - Som de clique das teclas configurável, intensidade da vibração, orientação (Automática, Fixar paisagem, Sistema), opção Sempre ligado e troca do separador decimal

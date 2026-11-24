@@ -7,7 +7,7 @@ Rechnermodi:
 
 Funktionen:
 - Individuelles 7-Segment-LCD-Display mit originalgetreuen Statusanzeigen (RPN, ALG, f, g, BEGIN, G/RAD, D.MY, C, PRGM)
-- Hoch- und Querformat-Layouts für jeden Rechnermodus
+- Vollwertige 39-Tasten-Layouts im Hoch- und Querformat für jeden Rechnermodus
 - Integrierte Kurzanleitung (Rückseiten-Referenz) für jeden Rechner
 - Dynamisches App-Symbol passend zum aktiven Modus und automatische Zustandsspeicherung
 - Konfigurierbarer Tastenklickton, Vibrationsstärke, Ausrichtungsmodus (Auto, Querformat sperren, System), „Immer eingeschaltet“-Schalter und Wechsel des Dezimaltrennzeichens (US/Europäisch)
