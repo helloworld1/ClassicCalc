@@ -236,12 +236,13 @@ public class Calculator extends Activity {
             if (isLandscape()) {
                 leftMargin = scaleLeftMargin(is12CP ? 85 : 69);
                 topMargin = scaleTopMargin(7);
-            } else if (this.calculatorMode == CalculatorMode.CC_12C) {
+            } else if (this.calculatorMode == CalculatorMode.CC_12C
+                    || this.calculatorMode == CalculatorMode.CC_12CP) {
                 leftMargin = scaleLeftMargin(22);
-                topMargin = scaleLeftMargin(5);
+                topMargin = scaleLeftMargin(is12CP ? 9 : 5);
             } else {
-                leftMargin = scaleLeftMargin(is12CP ? 16 : 14);
-                topMargin = scaleTopMargin(is12CP ? 20 : 17);
+                leftMargin = scaleLeftMargin(14);
+                topMargin = scaleTopMargin(17);
             }
             marginLayoutParams.setMargins(leftMargin, topMargin, 0, 0);
             lcdView.requestLayout();
@@ -367,9 +368,8 @@ public class Calculator extends Activity {
             }
             if (calcThread.isAlive() && calcThread.isExecuting && this.keypadInput != null) {
                 Log.d("ClassicCalc.Calculator", "Sending 'Enter' Key to abort calculation");
-                this.keypadInput.activeKeyIndex = (this.calculatorMode == CalculatorMode.CC_12CP)
-                        ? (isLandscape() ? 22 : 0)
-                        : 25;
+                this.keypadInput.activeKeyIndex =
+                        (this.calculatorMode == CalculatorMode.CC_12CP) ? 22 : 25;
                 this.keypadInput.handleKeyDown();
                 this.keypadInput.handleKeyUp();
                 this.keypadInput.activeKeyIndex = -1;

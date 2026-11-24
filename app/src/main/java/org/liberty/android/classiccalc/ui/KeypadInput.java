@@ -21,11 +21,6 @@ import java.util.Arrays;
 import org.liberty.android.classiccalc.R;
 
 public class KeypadInput {
-    private static final int[] PORTRAIT_12CP_KEY_CODES = {
-            32, 51, 25, 29, 20, 28, 34, 35, 36, 37, 15, 38,
-            39, 40, 41, 24, 42, 43, 44, 30, 46, 47, 48, 49
-    };
-
     private static AudioManager audioManager;
 
     float touchX;
@@ -484,31 +479,48 @@ public class KeypadInput {
 
     private void initializeKeyBounds12CP() {
         if (!this.calculatorActivity.isLandscape()) {
-            this.portraitLogoRect = scaleRect(270, 10, 310, 75);
-            this.portraitKeyRects[0] = scaleRect(14, 328, 66, 443);
-            this.portraitKeyRects[1] = scaleRect(14, 262, 66, 310);
-            this.portraitKeyRects[2] = scaleRect(14, 129, 66, 177);
-            this.portraitKeyRects[3] = scaleRect(74, 129, 126, 177);
-            this.portraitKeyRects[4] = scaleRect(134, 129, 186, 177);
-            this.portraitKeyRects[5] = scaleRect(255, 129, 307, 177);
-            this.portraitKeyRects[6] = scaleRect(74, 196, 126, 244);
-            this.portraitKeyRects[7] = scaleRect(74, 262, 126, 310);
-            this.portraitKeyRects[8] = scaleRect(74, 328, 126, 376);
-            this.portraitKeyRects[9] = scaleRect(74, 394, 126, 442);
-            this.portraitKeyRects[10] = scaleRect(14, 196, 66, 244);
-            this.portraitKeyRects[11] = scaleRect(134, 196, 186, 244);
-            this.portraitKeyRects[12] = scaleRect(134, 262, 186, 310);
-            this.portraitKeyRects[13] = scaleRect(134, 328, 186, 376);
-            this.portraitKeyRects[14] = scaleRect(134, 394, 186, 442);
-            this.portraitKeyRects[15] = scaleRect(195, 129, 247, 177);
-            this.portraitKeyRects[16] = scaleRect(195, 196, 247, 244);
-            this.portraitKeyRects[17] = scaleRect(195, 262, 247, 310);
-            this.portraitKeyRects[18] = scaleRect(195, 328, 247, 376);
-            this.portraitKeyRects[19] = scaleRect(195, 394, 247, 442);
-            this.portraitKeyRects[20] = scaleRect(255, 196, 307, 244);
-            this.portraitKeyRects[21] = scaleRect(255, 262, 307, 310);
-            this.portraitKeyRects[22] = scaleRect(255, 328, 307, 376);
-            this.portraitKeyRects[23] = scaleRect(255, 394, 307, 442);
+            final int refW = 960;
+            final int refH = 1800;
+            this.portraitLogoRect = scaleProportionalRect(805, 28, 923, 185, refW, refH);
+
+            int[][] topCols = {
+                    {70, 215}, {238, 382}, {405, 550}, {573, 718}, {741, 886}
+            };
+            int[][] topRows = {
+                    {305, 433},
+                    {498, 626},
+                    {690, 818},
+                    {853, 981}
+            };
+            for (int col = 0; col < topCols.length; col++) {
+                for (int row = 0; row < topRows.length; row++) {
+                    this.portraitKeyRects[col * 4 + row] = scaleProportionalRect(
+                            topCols[col][0], topRows[row][0], topCols[col][1], topRows[row][1], refW, refH);
+                }
+            }
+
+            int[][] bottomCols = {
+                    {69, 214}, {237, 382}, {405, 550}, {577, 721}, {740, 885}
+            };
+            int[][] bottomRows = {
+                    {1043, 1171},
+                    {1213, 1341},
+                    {1389, 1517},
+                    {1581, 1709}
+            };
+            this.portraitKeyRects[20] = scaleProportionalRect(
+                    bottomCols[0][0], bottomRows[0][0], bottomCols[0][1], bottomRows[0][1], refW, refH);
+            this.portraitKeyRects[21] = scaleProportionalRect(
+                    bottomCols[0][0], bottomRows[1][0], bottomCols[0][1], bottomRows[1][1], refW, refH);
+            this.portraitKeyRects[22] = scaleProportionalRect(
+                    bottomCols[0][0], bottomRows[2][0], bottomCols[0][1], bottomRows[3][1], refW, refH);
+            for (int col = 1; col < bottomCols.length; col++) {
+                for (int row = 0; row < bottomRows.length; row++) {
+                    int keyIndex = 23 + (col - 1) * 4 + row;
+                    this.portraitKeyRects[keyIndex] = scaleProportionalRect(
+                            bottomCols[col][0], bottomRows[row][0], bottomCols[col][1], bottomRows[row][1], refW, refH);
+                }
+            }
         } else {
             this.landscapeLogoRect = scaleRect(410, 0, 470, 50);
             this.landscapeKeyRects[0] = scaleRect(22, 86, 59, 121);
@@ -791,13 +803,7 @@ public class KeypadInput {
         return new Rect(scaledLeft, scaledTop, scaledRight, scaledBottom);
     }
 
-    private int map12CPKeyIndexToNativeCode(int keyIndex, boolean isLandscape) {
-        if (!isLandscape) {
-            if (keyIndex >= 0 && keyIndex < PORTRAIT_12CP_KEY_CODES.length) {
-                return PORTRAIT_12CP_KEY_CODES[keyIndex];
-            }
-            return -1;
-        }
+    private int map12CPKeyIndexToNativeCode(int keyIndex) {
         if (keyIndex == 3 || keyIndex < 0 || keyIndex > 38) {
             return -1;
         }
@@ -807,7 +813,7 @@ public class KeypadInput {
     public void handleKeyDown() {
         CalculatorMode mode = this.calculatorActivity.getCalculatorMode();
         if (mode == CalculatorMode.CC_12CP) {
-            int nativeCode = map12CPKeyIndexToNativeCode(this.activeKeyIndex, this.calculatorActivity.isLandscape());
+            int nativeCode = map12CPKeyIndexToNativeCode(this.activeKeyIndex);
             if (nativeCode != -1) {
                 this.calculatorActivity.getCalculationThread().enqueueKey(nativeCode);
                 synchronized (this.calculatorActivity.getCalculationThread()) {
@@ -845,14 +851,13 @@ public class KeypadInput {
     public void handleKeyUp() {
         CalculatorMode mode = this.calculatorActivity.getCalculatorMode();
         if (mode == CalculatorMode.CC_12CP) {
-            boolean isLandscape = this.calculatorActivity.isLandscape();
-            if (isLandscape && this.activeKeyIndex == 3) {
-                if (isTouchInside(this.landscapeKeyRects[3])) {
+            if (this.activeKeyIndex == 3) {
+                if (isTouchInside(getActiveKeyRect(3))) {
                     this.calculatorActivity.finish();
                 }
                 return;
             }
-            int nativeCode = map12CPKeyIndexToNativeCode(this.activeKeyIndex, isLandscape);
+            int nativeCode = map12CPKeyIndexToNativeCode(this.activeKeyIndex);
             if (nativeCode != -1) {
                 this.calculatorActivity.getCalculationThread().enqueueKey(nativeCode + 128);
                 synchronized (this.calculatorActivity.getCalculationThread()) {
