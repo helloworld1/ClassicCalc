@@ -105,10 +105,7 @@ public class LcdView extends View {
             return 0;
         }
         if (this.calculatorActivity != null && !this.calculatorActivity.isLandscape()) {
-            CalculatorMode mode = this.calculatorActivity.getCalculatorMode();
-            if (mode == CalculatorMode.CC_12C || mode == CalculatorMode.CC_12CP) {
-                return scaleHorizontal(value);
-            }
+            return scaleHorizontal(value);
         }
         float density = metrics.density;
         float densityDpi = metrics.densityDpi;

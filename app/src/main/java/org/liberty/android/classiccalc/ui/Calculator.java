@@ -236,13 +236,9 @@ public class Calculator extends Activity {
             if (isLandscape()) {
                 leftMargin = scaleLeftMargin(is12CP ? 85 : 69);
                 topMargin = scaleTopMargin(7);
-            } else if (this.calculatorMode == CalculatorMode.CC_12C
-                    || this.calculatorMode == CalculatorMode.CC_12CP) {
+            } else {
                 leftMargin = scaleLeftMargin(22);
                 topMargin = scaleLeftMargin(is12CP ? 9 : 5);
-            } else {
-                leftMargin = scaleLeftMargin(14);
-                topMargin = scaleTopMargin(17);
             }
             marginLayoutParams.setMargins(leftMargin, topMargin, 0, 0);
             lcdView.requestLayout();

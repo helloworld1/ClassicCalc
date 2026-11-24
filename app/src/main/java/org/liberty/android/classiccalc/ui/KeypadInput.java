@@ -567,31 +567,55 @@ public class KeypadInput {
 
     private void initializeKeyBounds15C() {
         if (!this.calculatorActivity.isLandscape()) {
-            this.portraitLogoRect = scaleRect(270, 0, 310, 70);
-            this.portraitKeyRects[0] = scaleRect(193, 127, 248, 178);
-            this.portraitKeyRects[4] = scaleRect(133, 127, 188, 178);
-            this.portraitKeyRects[5] = scaleRect(193, 392, 248, 443);
-            this.portraitKeyRects[6] = scaleRect(72, 194, 127, 245);
-            this.portraitKeyRects[7] = scaleRect(133, 194, 188, 245);
-            this.portraitKeyRects[8] = scaleRect(193, 194, 248, 245);
-            this.portraitKeyRects[9] = scaleRect(254, 194, 309, 245);
-            this.portraitKeyRects[16] = scaleRect(72, 260, 127, 311);
-            this.portraitKeyRects[17] = scaleRect(133, 260, 188, 311);
-            this.portraitKeyRects[18] = scaleRect(193, 260, 248, 311);
-            this.portraitKeyRects[19] = scaleRect(254, 260, 309, 311);
-            this.portraitKeyRects[22] = scaleRect(12, 260, 67, 311);
-            this.portraitKeyRects[23] = scaleRect(12, 194, 67, 245);
-            this.portraitKeyRects[24] = scaleRect(254, 127, 309, 178);
-            this.portraitKeyRects[25] = scaleRect(12, 326, 67, 445);
-            this.portraitKeyRects[26] = scaleRect(72, 326, 127, 377);
-            this.portraitKeyRects[27] = scaleRect(133, 326, 188, 377);
-            this.portraitKeyRects[28] = scaleRect(193, 326, 248, 377);
-            this.portraitKeyRects[29] = scaleRect(254, 326, 309, 377);
-            this.portraitKeyRects[33] = scaleRect(12, 127, 67, 178);
-            this.portraitKeyRects[34] = scaleRect(72, 127, 127, 178);
-            this.portraitKeyRects[36] = scaleRect(72, 392, 127, 443);
-            this.portraitKeyRects[37] = scaleRect(133, 392, 188, 443);
-            this.portraitKeyRects[39] = scaleRect(254, 392, 309, 443);
+            final int refW = 960;
+            final int refH = 1800;
+            this.portraitLogoRect = scaleProportionalRect(805, 35, 923, 185, refW, refH);
+
+            int[][] topCols = {
+                    {70, 215}, {238, 382}, {405, 550}, {573, 718}, {741, 886}
+            };
+            int[][] topRows = {
+                    {300, 428},
+                    {476, 604},
+                    {672, 800},
+                    {842, 970}
+            };
+            int[] topRowBaseKeys = {0, 10, 20, 30};
+            for (int row = 0; row < topRows.length; row++) {
+                int yTop = topRows[row][0];
+                int yBot = topRows[row][1];
+                int baseKey = topRowBaseKeys[row];
+                for (int col = 0; col < topCols.length; col++) {
+                    this.portraitKeyRects[baseKey + col] = scaleProportionalRect(
+                            topCols[col][0], yTop, topCols[col][1], yBot, refW, refH);
+                }
+            }
+
+            int[][] bottomCols = {
+                    {69, 214}, {237, 382}, {405, 550}, {577, 721}, {740, 885}
+            };
+            int[][] bottomRows = {
+                    {1024, 1152},
+                    {1210, 1338},
+                    {1388, 1516},
+                    {1580, 1708}
+            };
+            int[] bottomRowBaseKeys = {5, 15, 25, 35};
+            for (int row = 0; row < bottomRows.length; row++) {
+                int yTop = bottomRows[row][0];
+                int yBot = bottomRows[row][1];
+                int baseKey = bottomRowBaseKeys[row];
+                for (int col = 0; col < bottomCols.length; col++) {
+                    int keyIndex = baseKey + col;
+                    if (keyIndex == 25) {
+                        this.portraitKeyRects[25] = scaleProportionalRect(
+                                bottomCols[0][0], bottomRows[2][0], bottomCols[0][1], bottomRows[3][1], refW, refH);
+                    } else if (keyIndex != 35) {
+                        this.portraitKeyRects[keyIndex] = scaleProportionalRect(
+                                bottomCols[col][0], yTop, bottomCols[col][1], yBot, refW, refH);
+                    }
+                }
+            }
         } else {
             initializeStandard40KeyLandscapeBounds();
         }
