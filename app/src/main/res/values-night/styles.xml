@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CalculatorTheme" parent="@android:style/Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/calculator_window_bg</item>
+        <item name="android:colorBackground">@color/calculator_window_bg</item>
+        <item name="android:statusBarColor">@color/calculator_window_bg</item>
+        <item name="android:navigationBarColor">@color/calculator_window_bg</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+    <style name="SettingsDialogTheme" parent="@android:style/Theme.Material.Dialog.Alert">
+        <item name="android:colorAccent">@color/settings_accent</item>
+        <item name="android:colorBackground">@color/settings_popup_bg</item>
+        <item name="android:background">@color/settings_popup_bg</item>
+        <item name="android:textColorPrimary">@color/settings_text_primary</item>
+        <item name="android:textColorSecondary">@color/settings_text_secondary</item>
+    </style>
+    <style name="SettingsTheme" parent="@android:style/Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/settings_bg</item>
+        <item name="android:colorBackground">@color/settings_bg</item>
+        <item name="android:colorBackgroundFloating">@color/settings_popup_bg</item>
+        <item name="android:colorPrimary">@color/settings_bg</item>
+        <item name="android:colorPrimaryDark">@color/settings_bg</item>
+        <item name="android:colorAccent">@color/settings_accent</item>
+        <item name="android:colorControlActivated">@color/settings_accent</item>
+        <item name="android:colorControlNormal">@color/settings_text_secondary</item>
+        <item name="android:colorControlHighlight">@color/settings_ripple</item>
+        <item name="android:textColorPrimary">@color/settings_text_primary</item>
+        <item name="android:textColorSecondary">@color/settings_text_secondary</item>
+        <item name="android:statusBarColor">@color/settings_bg</item>
+        <item name="android:navigationBarColor">@color/settings_bg</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:alertDialogTheme">@style/SettingsDialogTheme</item>
+    </style>
+</resources>

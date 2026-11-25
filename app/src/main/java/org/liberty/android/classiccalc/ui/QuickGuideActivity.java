@@ -18,6 +18,7 @@ public class QuickGuideActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.back_layout);
+        SettingsActivity.applySystemBarAppearance(this);
 
         View rootView = findViewById(R.id.quickGuideRootLayout);
         if (rootView != null) {

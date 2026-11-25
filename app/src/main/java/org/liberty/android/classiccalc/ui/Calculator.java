@@ -493,6 +493,7 @@ public class Calculator extends Activity {
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
         }
+        SettingsActivity.applySystemBarAppearance(this, true);
     }
 
     @Override
@@ -538,7 +539,7 @@ public class Calculator extends Activity {
         updateStatusBarForOrientation();
         setContentView(R.layout.main);
         this.viewSwitcher = (ViewSwitcher) findViewById(R.id.ViewSwitcher);
-        this.viewSwitcher.setBackgroundColor(Color.BLACK);
+        this.viewSwitcher.setBackgroundColor(getColor(R.color.calculator_window_bg));
         this.viewSwitcher.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
             @Override
             public WindowInsets onApplyWindowInsets(View v, WindowInsets insets) {

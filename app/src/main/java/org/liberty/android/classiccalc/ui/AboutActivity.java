@@ -25,6 +25,7 @@ public class AboutActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about_layout);
+        SettingsActivity.applySystemBarAppearance(this);
 
         View rootView = findViewById(R.id.aboutRootLayout);
         if (rootView != null) {

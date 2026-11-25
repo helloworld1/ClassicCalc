@@ -26,9 +26,11 @@ import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowInsets;
+import android.view.WindowInsetsController;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
@@ -237,10 +239,47 @@ public class SettingsActivity extends Activity
         }
     }
 
+    static void applySystemBarAppearance(Activity activity) {
+        applySystemBarAppearance(activity, false);
+    }
+
+    static void applySystemBarAppearance(Activity activity, boolean forceDarkBackground) {
+        if (activity == null) {
+            return;
+        }
+        boolean isNightMode = (activity.getResources().getConfiguration().uiMode
+                & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
+        boolean useDarkBarIcons = !forceDarkBackground && !isNightMode;
+        View decorView = activity.getWindow().getDecorView();
+        if (Build.VERSION.SDK_INT >= 30) {
+            WindowInsetsController controller = activity.getWindow().getInsetsController();
+            if (controller != null) {
+                int mask = WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+                        | WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS;
+                controller.setSystemBarsAppearance(useDarkBarIcons ? mask : 0, mask);
+            }
+        } else {
+            int flags = decorView.getSystemUiVisibility();
+            if (useDarkBarIcons) {
+                flags |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+                if (Build.VERSION.SDK_INT >= 26) {
+                    flags |= View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
+                }
+            } else {
+                flags &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+                if (Build.VERSION.SDK_INT >= 26) {
+                    flags &= ~View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
+                }
+            }
+            decorView.setSystemUiVisibility(flags);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_dlg);
+        applySystemBarAppearance(this);
 
         View rootView = findViewById(R.id.settingsRootLayout);
         if (rootView != null) {
@@ -561,7 +600,7 @@ public class SettingsActivity extends Activity
     }
 
     private void showResetConfirmDialog() {
-        this.resetConfirmDialog = new AlertDialog.Builder(this)
+        this.resetConfirmDialog = new AlertDialog.Builder(this, R.style.SettingsDialogTheme)
                 .setIcon((Drawable) null)
                 .setTitle(R.string.Reset_Calculator)
                 .setMessage(R.string.Reset_Message)
@@ -574,6 +613,15 @@ public class SettingsActivity extends Activity
                 .setNegativeButton(R.string.No, (DialogInterface.OnClickListener) null)
                 .create();
         this.resetConfirmDialog.show();
+        int accentColor = getColor(R.color.settings_accent);
+        Button positiveButton = this.resetConfirmDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        if (positiveButton != null) {
+            positiveButton.setTextColor(accentColor);
+        }
+        Button negativeButton = this.resetConfirmDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+        if (negativeButton != null) {
+            negativeButton.setTextColor(accentColor);
+        }
     }
 
     private void performCalculatorReset() {
