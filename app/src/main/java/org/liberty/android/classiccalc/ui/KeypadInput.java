@@ -4,18 +4,23 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Insets;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.AudioManager;
+import android.os.Build;
 import android.os.Vibrator;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowInsets;
+import android.view.WindowMetrics;
 import android.widget.FrameLayout;
 import java.util.Arrays;
 import org.liberty.android.classiccalc.R;
@@ -909,12 +914,30 @@ public class KeypadInput {
 
     public void updateLayoutDimensions() {
         DisplayMetrics metrics = this.calculatorActivity.displayMetrics;
-        int screenHeight = metrics.heightPixels;
-        int screenWidth = metrics.widthPixels;
-        int statusBarHeightPx = (int) (metrics.density * 25.0f);
-        if (!this.calculatorActivity.isFullScreen) {
-            screenHeight -= statusBarHeightPx;
+        int screenWidth;
+        int screenHeight;
+        if (Build.VERSION.SDK_INT >= 30) {
+            WindowMetrics windowMetrics =
+                    this.calculatorActivity.getWindowManager().getCurrentWindowMetrics();
+            Rect windowBounds = windowMetrics.getBounds();
+            screenWidth = windowBounds.width();
+            screenHeight = windowBounds.height();
+            if (!this.calculatorActivity.isFullScreen) {
+                Insets insets = windowMetrics.getWindowInsets().getInsets(
+                        WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout());
+                screenWidth -= (insets.left + insets.right);
+                screenHeight -= (insets.top + insets.bottom);
+            }
+        } else {
+            screenHeight = metrics.heightPixels;
+            screenWidth = metrics.widthPixels;
+            int statusBarHeightPx = (int) (metrics.density * 25.0f);
+            if (!this.calculatorActivity.isFullScreen) {
+                screenHeight -= statusBarHeightPx;
+            }
         }
+        screenWidth = Math.max(1, screenWidth);
+        screenHeight = Math.max(1, screenHeight);
         CalculatorMode mode = this.calculatorActivity.getCalculatorMode();
         View landscapeLayout = this.calculatorActivity.findViewById(R.id.mainLayoutLandscape);
         View portraitLayout = this.calculatorActivity.findViewById(R.id.mainLayoutPortrait);
@@ -938,7 +961,9 @@ public class KeypadInput {
         float scaleFactor = heightScale < widthScale ? heightScale : widthScale;
         int targetWidth = (int) (bitmapWidth * scaleFactor);
         int targetHeight = (int) (bitmapHeight * scaleFactor);
-        layoutView.setLayoutParams(new FrameLayout.LayoutParams(targetWidth, targetHeight));
+        FrameLayout.LayoutParams layoutParams =
+                new FrameLayout.LayoutParams(targetWidth, targetHeight, Gravity.CENTER);
+        layoutView.setLayoutParams(layoutParams);
         this.scaledLayoutWidth = targetWidth;
         this.horizontalMargin = Math.max(0, (screenWidth - targetWidth) / 2);
         this.scaledLayoutHeight = targetHeight;
@@ -946,11 +971,6 @@ public class KeypadInput {
         Log.d("ClassicCalc.Input", "mApplicationInstance.fullScreen:" + this.calculatorActivity.isFullScreen);
         Log.d("ClassicCalc.Input", "marginWidth:marginHeight" + this.horizontalMargin + ":" + this.verticalMargin);
         this.calculatorActivity.setCalculatorDimensions(this.scaledLayoutWidth, this.scaledLayoutHeight);
-        if (layoutView.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
-            ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) layoutView.getLayoutParams();
-            Log.d("ClassicCalc.Input", "l, t, r, b : " + this.horizontalMargin + ", " + this.verticalMargin + ", " + this.horizontalMargin + ", " + this.verticalMargin);
-            marginLayoutParams.setMargins(this.horizontalMargin, this.verticalMargin, this.horizontalMargin, this.verticalMargin);
-            layoutView.requestLayout();
-        }
+        layoutView.requestLayout();
     }
 }

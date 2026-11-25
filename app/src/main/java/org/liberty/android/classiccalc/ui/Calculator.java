@@ -8,7 +8,9 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.Insets;
 import android.media.AudioManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,6 +19,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowInsets;
 import android.view.WindowManager;
 import android.widget.ViewSwitcher;
 import java.io.File;
@@ -502,6 +505,10 @@ public class Calculator extends Activity {
         }
         this.lcdView = null;
         updateStatusBarForOrientation();
+        if (this.isFullScreen) {
+            this.viewSwitcher.setPadding(0, 0, 0, 0);
+        }
+        this.viewSwitcher.requestApplyInsets();
         if (isLandscape()) {
             Log.d("ClassicCalc.Calculator", "onConfigurationChanged:Landscape " + this.displayMetrics.widthPixels + ":" + this.displayMetrics.heightPixels);
             this.lcdView = (LcdView) findViewById(R.id.LcdView);
@@ -532,6 +539,46 @@ public class Calculator extends Activity {
         setContentView(R.layout.main);
         this.viewSwitcher = (ViewSwitcher) findViewById(R.id.ViewSwitcher);
         this.viewSwitcher.setBackgroundColor(Color.BLACK);
+        this.viewSwitcher.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
+            @Override
+            public WindowInsets onApplyWindowInsets(View v, WindowInsets insets) {
+                int padLeft = 0;
+                int padTop = 0;
+                int padRight = 0;
+                int padBottom = 0;
+                if (!Calculator.this.isFullScreen) {
+                    if (Build.VERSION.SDK_INT >= 30) {
+                        Insets bars = insets.getInsets(
+                                WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout());
+                        padLeft = bars.left;
+                        padTop = bars.top;
+                        padRight = bars.right;
+                        padBottom = bars.bottom;
+                    } else {
+                        padLeft = insets.getSystemWindowInsetLeft();
+                        padTop = insets.getSystemWindowInsetTop();
+                        padRight = insets.getSystemWindowInsetRight();
+                        padBottom = insets.getSystemWindowInsetBottom();
+                    }
+                }
+                if (v.getPaddingLeft() != padLeft
+                        || v.getPaddingTop() != padTop
+                        || v.getPaddingRight() != padRight
+                        || v.getPaddingBottom() != padBottom) {
+                    v.setPadding(padLeft, padTop, padRight, padBottom);
+                    if (Calculator.this.keypadInput != null) {
+                        Calculator.this.keypadInput.updateLayoutDimensions();
+                        Calculator.this.keypadInput.initializeKeyBounds();
+                    }
+                    if (Calculator.this.lcdView != null) {
+                        Calculator.this.lcdView.initializeLayout(Calculator.this);
+                        Calculator.this.updateLcdMargins(Calculator.this.lcdView);
+                        Calculator.this.lcdView.invalidate();
+                    }
+                }
+                return insets;
+            }
+        });
         if (isLandscape()) {
             this.lcdView = (LcdView) findViewById(R.id.LcdView);
             this.viewSwitcher.setDisplayedChild(0);
