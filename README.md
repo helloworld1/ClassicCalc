@@ -67,6 +67,7 @@
 - **Full-Function Portrait & Landscape Layouts**: Dedicated high-resolution 39-key faceplates in both portrait (top/bottom 5×4 split) and classic Voyager landscape (10×4) orientations across all three calculator modes.
 - **Tactile Key Response**: Plays audio/haptic feedback immediately on key press (and **CC** badge tap) while registering keystrokes cleanly on key release.
 - **Interactive LCD**: Custom 7-segment LCD rendering (`fonts/calc_font.ttf`) with active status annunciators (`-`, `*`/`|`, `USER`/`RPN`/`ALG`, `( )`, `f`, `g`, `BEGIN`, `G`/`RAD`, `D.MY`, `C`, `PRGM`).
+- **Light & Dark Theme Support**: Settings, Quick Guide navigation, and About automatically adapt to system Light and Dark mode while keeping the calculator screen framed in black.
 - **Dynamic Launcher Icon**: Automatically updates the app launcher icon to match the selected calculator mode (`12C`, `12C Platinum`, or `15C`).
 - **Automatic State Persistence**: Stack contents, financial registers, storage registers, modes, and programs are automatically saved on pause/exit and restored on launch for each calculator mode independently.
 

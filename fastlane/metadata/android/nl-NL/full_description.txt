@@ -10,4 +10,4 @@ Functies:
 - Volwaardige 39-toetsenindelingen in zowel staande als liggende stand voor elke rekenmachinemodus
 - Ingebouwde snelstartgids met de referentieplaat voor elk model
 - Dynamisch startpictogram dat overeenkomt met de actieve modus en automatisch opslaan van de status
-- Instelbaar toetsklikgeluid, trillingssterkte, schermstand (Automatisch, Liggend vergrendelen, Systeem), Altijd aan-schakelaar en wisselen van decimaalteken
+- Instelbaar toetsklikgeluid, trillingssterkte, schermstand (Automatisch, Liggend vergrendelen, Systeem), Altijd aan-schakelaar, wisselen van decimaalteken en ondersteuning voor licht en donker thema

@@ -10,4 +10,4 @@ Funcionalidades:
 - Disposições completas de 39 teclas em retrato e paisagem para cada modo de calculadora
 - Guia rápido integrado com a placa de referência traseira de cada modelo
 - Ícone dinâmico do iniciador correspondente ao modo ativo e gravação automática do estado
-- Som de clique das teclas configurável, intensidade da vibração, orientação (Automática, Fixar paisagem, Sistema), opção Sempre ligado e troca do separador decimal
+- Som de clique das teclas configurável, intensidade da vibração, orientação (Automática, Fixar paisagem, Sistema), opção Sempre ligado, troca do separador decimal e suporte para tema claro e escuro

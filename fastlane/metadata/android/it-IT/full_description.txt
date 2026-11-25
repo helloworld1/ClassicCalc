@@ -10,4 +10,4 @@ Funzionalità:
 - Layout completi a 39 tasti in verticale e orizzontale per ogni calcolatrice
 - Guida rapida integrata con la scheda di riferimento posteriore di ciascun modello
 - Icona del launcher dinamica in base alla modalità attiva e salvataggio automatico dello stato
-- Suono dei tasti configurabile, intensità della vibrazione, orientamento (Auto, Blocca orizzontale, Sistema), interruttore Sempre attivo e scambio del separatore decimale
+- Suono dei tasti configurabile, intensità della vibrazione, orientamento (Auto, Blocca orizzontale, Sistema), interruttore Sempre attivo, scambio del separatore decimale e supporto per tema chiaro e scuro

@@ -1,0 +1,3 @@
+- Added automatic Light and Dark theme support for Settings, Quick Guide, and About screens
+- Centered the calculator layout vertically and horizontally in portrait mode with full system-bar and cutout inset support
+- Updated build toolchain to Gradle 9.9.2 and Android Gradle Plugin 9.5.2

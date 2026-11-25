@@ -10,4 +10,4 @@ Features:
 - Full-function 39-key portrait and landscape layouts for every calculator mode
 - Built-in Quick Guide reference plate for each calculator
 - Dynamic launcher icon and state persistence across calculator modes
-- Configurable key click sound, vibration strength, orientation mode (Auto, Lock Landscape, System), Always on screen toggle, and US/European decimal separator swap
+- Configurable key click sound, vibration strength, orientation mode (Auto, Lock Landscape, System), Always on screen toggle, US/European decimal separator swap, and automatic Light & Dark theme support

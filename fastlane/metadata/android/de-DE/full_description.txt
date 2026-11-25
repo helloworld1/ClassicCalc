@@ -10,4 +10,4 @@ Funktionen:
 - Vollwertige 39-Tasten-Layouts im Hoch- und Querformat für jeden Rechnermodus
 - Integrierte Kurzanleitung (Rückseiten-Referenz) für jeden Rechner
 - Dynamisches App-Symbol passend zum aktiven Modus und automatische Zustandsspeicherung
-- Konfigurierbarer Tastenklickton, Vibrationsstärke, Ausrichtungsmodus (Auto, Querformat sperren, System), „Immer eingeschaltet“-Schalter und Wechsel des Dezimaltrennzeichens (US/Europäisch)
+- Konfigurierbarer Tastenklickton, Vibrationsstärke, Ausrichtungsmodus (Auto, Querformat sperren, System), „Immer eingeschaltet“-Schalter, Wechsel des Dezimaltrennzeichens (US/Europäisch) sowie Unterstützung für helles und dunkles Design

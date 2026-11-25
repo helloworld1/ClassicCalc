@@ -10,4 +10,4 @@ Características:
 - Diseños completos de 39 teclas en orientación vertical y horizontal para cada calculadora
 - Guía rápida integrada con la placa de referencia trasera de cada modelo
 - Icono del lanzador dinámico según el modo activo y guardado automático del estado
-- Sonido de clic al pulsar teclas, intensidad de vibración ajustable, control de orientación (Automática, Bloquear horizontal, Sistema), interruptor de pantalla siempre activa e intercambio de separador decimal (EE. UU./Europa)
+- Sonido de clic al pulsar teclas, intensidad de vibración ajustable, control de orientación (Automática, Bloquear horizontal, Sistema), interruptor de pantalla siempre activa, intercambio de separador decimal (EE. UU./Europa) y compatibilidad con tema claro y oscuro
