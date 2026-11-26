@@ -7,7 +7,7 @@ This document describes the project layout, architecture, calculation engines, L
 ## 1. Project Structure
 
 ```text
-classic_calc/
+ClassicCalc/
 ├── app/
 │   ├── build.gradle                         # Android application & test configuration (minSdk 24, targetSdk 37)
 │   └── src/
@@ -89,16 +89,16 @@ flowchart TD
 
 | Class | Responsibility |
 | :--- | :--- |
-| [`Application_12c.java`](file:///home/liberty/mp/android/classic_calc/app/src/main/java/org/liberty/android/classiccalc/ui/Application_12c.java) | Custom `Application` that tracks started activities via `ActivityLifecycleCallbacks` and updates the active profile's launcher `<activity-alias>` when the app transitions to the background. |
-| [`Calculator.java`](file:///home/liberty/mp/android/classic_calc/app/src/main/java/org/liberty/android/classiccalc/ui/Calculator.java) | Main calculator `Activity`. Manages orientation-dependent layout switching (`ViewSwitcher`), LCD positioning, idle wake-lock timeout, state persistence, pending Settings actions (reset / decimal separator swap), and bridges between the UI and engine instances (`emulator12C`, `engine12CP`, `emulator15C`). |
-| [`CalculatorMode.java`](file:///home/liberty/mp/android/classic_calc/app/src/main/java/org/liberty/android/classiccalc/ui/CalculatorMode.java) | Enum defining the three calculator modes (`CC_12C`, `CC_12CP`, `CC_15C`), their launcher `<activity-alias>` class names, and portrait/landscape faceplate and Quick Guide drawables. |
-| [`KeypadInput.java`](file:///home/liberty/mp/android/classic_calc/app/src/main/java/org/liberty/android/classiccalc/ui/KeypadInput.java) | Scales the high-resolution faceplate bitmaps (`1830×1080` / `1829×1080` 10×4 landscape and `1080×2025` top/bottom 5×4 full-39-key portrait), maps touch and hardware keyboard input to all 39 calculator keys plus the **CC** logo hitbox, renders pressed-key highlight overlays, triggers sound/haptic feedback on key-down, and registers keys on key-up. |
-| [`KeyState.java`](file:///home/liberty/mp/android/classic_calc/app/src/main/java/org/liberty/android/classiccalc/ui/KeyState.java) | Enum representing key highlight states (`IDLE`, `PRESSED`, `RELEASED`) rendered by `KeypadInput.KeyHighlightOverlayView`. |
-| [`CalculationThread.java`](file:///home/liberty/mp/android/classic_calc/app/src/main/java/org/liberty/android/classiccalc/ui/CalculationThread.java) | Background worker thread maintaining a circular key buffer and executing calculator cycles off the Android UI thread. |
-| [`LcdView.java`](file:///home/liberty/mp/android/classic_calc/app/src/main/java/org/liberty/android/classiccalc/ui/LcdView.java) | Custom `View` that parses the engine's display string (`digits + 11 indicator characters`) and renders the 10-digit 7-segment display (`calc_font.ttf`), decimal points/commas, and status annunciators (`-`, `*`/`|`, `USER`/`RPN`/`ALG`, `( )`, `f`, `g`, `BEGIN`, `G`/`RAD`, `D.MY`, `C`, `PRGM`). |
-| [`SettingsActivity.java`](file:///home/liberty/mp/android/classic_calc/app/src/main/java/org/liberty/android/classiccalc/ui/SettingsActivity.java) | Dedicated dark-themed Settings screen (`@style/SettingsTheme`) for switching Calculator Mode, opening Quick Guide or About, toggling Always on / Sound / Swap Decimal Separator, configuring Vibration (`Off`/`Low`/`Medium`/`High`) and Orientation (`System`/`Lock Landscape`/`Auto`), resetting the calculator, and atomically updating `<activity-alias>` launcher icons (`PackageManager.setComponentEnabledSettings` on API 33+, enable-first fallback on API 24–32). |
-| [`QuickGuideActivity.java`](file:///home/liberty/mp/android/classic_calc/app/src/main/java/org/liberty/android/classiccalc/ui/QuickGuideActivity.java) | Displays the mode-specific back-cover reference plate with top navigation header and system status/navigation bar insets preserved. |
-| [`AboutActivity.java`](file:///home/liberty/mp/android/classic_calc/app/src/main/java/org/liberty/android/classiccalc/ui/AboutActivity.java) | Displays the active mode icon, app name, `versionName`, `versionCode`, and clickable GitHub repository link. |
+| [`Application_12c.java`](file:///home/liberty/mp/android/ClassicCalc/app/src/main/java/org/liberty/android/classiccalc/ui/Application_12c.java) | Custom `Application` that tracks started activities via `ActivityLifecycleCallbacks` and updates the active profile's launcher `<activity-alias>` when the app transitions to the background. |
+| [`Calculator.java`](file:///home/liberty/mp/android/ClassicCalc/app/src/main/java/org/liberty/android/classiccalc/ui/Calculator.java) | Main calculator `Activity`. Manages orientation-dependent layout switching (`ViewSwitcher`), LCD positioning, idle wake-lock timeout, state persistence, pending Settings actions (reset / decimal separator swap), and bridges between the UI and engine instances (`emulator12C`, `engine12CP`, `emulator15C`). |
+| [`CalculatorMode.java`](file:///home/liberty/mp/android/ClassicCalc/app/src/main/java/org/liberty/android/classiccalc/ui/CalculatorMode.java) | Enum defining the three calculator modes (`CC_12C`, `CC_12CP`, `CC_15C`), their launcher `<activity-alias>` class names, and portrait/landscape faceplate and Quick Guide drawables. |
+| [`KeypadInput.java`](file:///home/liberty/mp/android/ClassicCalc/app/src/main/java/org/liberty/android/classiccalc/ui/KeypadInput.java) | Scales the high-resolution faceplate bitmaps (`1830×1080` / `1829×1080` 10×4 landscape and `1080×2025` top/bottom 5×4 full-39-key portrait), maps touch and hardware keyboard input to all 39 calculator keys plus the **CC** logo hitbox, renders pressed-key highlight overlays, triggers sound/haptic feedback on key-down, and registers keys on key-up. |
+| [`KeyState.java`](file:///home/liberty/mp/android/ClassicCalc/app/src/main/java/org/liberty/android/classiccalc/ui/KeyState.java) | Enum representing key highlight states (`IDLE`, `PRESSED`, `RELEASED`) rendered by `KeypadInput.KeyHighlightOverlayView`. |
+| [`CalculationThread.java`](file:///home/liberty/mp/android/ClassicCalc/app/src/main/java/org/liberty/android/classiccalc/ui/CalculationThread.java) | Background worker thread maintaining a circular key buffer and executing calculator cycles off the Android UI thread. |
+| [`LcdView.java`](file:///home/liberty/mp/android/ClassicCalc/app/src/main/java/org/liberty/android/classiccalc/ui/LcdView.java) | Custom `View` that parses the engine's display string (`digits + 11 indicator characters`) and renders the 10-digit 7-segment display (`calc_font.ttf`), decimal points/commas, and status annunciators (`-`, `*`/`|`, `USER`/`RPN`/`ALG`, `( )`, `f`, `g`, `BEGIN`, `G`/`RAD`, `D.MY`, `C`, `PRGM`). |
+| [`SettingsActivity.java`](file:///home/liberty/mp/android/ClassicCalc/app/src/main/java/org/liberty/android/classiccalc/ui/SettingsActivity.java) | Dedicated dark-themed Settings screen (`@style/SettingsTheme`) for switching Calculator Mode, opening Quick Guide or About, toggling Always on / Sound / Swap Decimal Separator, configuring Vibration (`Off`/`Low`/`Medium`/`High`) and Orientation (`System`/`Lock Landscape`/`Auto`), resetting the calculator, and atomically updating `<activity-alias>` launcher icons (`PackageManager.setComponentEnabledSettings` on API 33+, enable-first fallback on API 24–32). |
+| [`QuickGuideActivity.java`](file:///home/liberty/mp/android/ClassicCalc/app/src/main/java/org/liberty/android/classiccalc/ui/QuickGuideActivity.java) | Displays the mode-specific back-cover reference plate with top navigation header and system status/navigation bar insets preserved. |
+| [`AboutActivity.java`](file:///home/liberty/mp/android/ClassicCalc/app/src/main/java/org/liberty/android/classiccalc/ui/AboutActivity.java) | Displays the active mode icon, app name, `versionName`, `versionCode`, and clickable GitHub repository link. |
 
 ---
 
@@ -107,7 +107,7 @@ flowchart TD
 Classic Calc uses two distinct pure-Java calculation engines:
 
 ### 4.1 `NutEmulator` (CC 12C & CC 15C)
-- **File**: [`NutEmulator.java`](file:///home/liberty/mp/android/classic_calc/app/src/main/java/org/liberty/android/classiccalc/engine/NutEmulator.java)
+- **File**: [`NutEmulator.java`](file:///home/liberty/mp/android/ClassicCalc/app/src/main/java/org/liberty/android/classiccalc/engine/NutEmulator.java)
 - **Design**: Cycle-accurate emulator for the HP Nut CPU architecture paired with embedded ROM images (12C and 15C).
 - **State Layout**: Stores CPU registers ($A, B, C, M, N, G$, $P, Q$, $F, S$, carry, program counter, call stack, RAM registers, and LCD segment bits) inside a little-endian `ByteBuffer` persisted to disk (`calc` for 12C, `calc15` for 15C).
 - **Key & Execution Cycle**:
@@ -117,30 +117,30 @@ Classic Calc uses two distinct pure-Java calculation engines:
 ### 4.2 `CalcEngine` Hierarchy (CC 12C Platinum)
 The CC 12C Platinum engine is structured as a linear inheritance chain of 11 specialized classes:
 
-1. [`CalcMemory.java`](file:///home/liberty/mp/android/classic_calc/app/src/main/java/org/liberty/android/classiccalc/engine/CalcMemory.java):
+1. [`CalcMemory.java`](file:///home/liberty/mp/android/ClassicCalc/app/src/main/java/org/liberty/android/classiccalc/engine/CalcMemory.java):
    - Manages a 2 MB little-endian `ByteBuffer` (`mem`) modeling `.rodata` (`0x0b77e0`), `.data` (`0x11e9a8`), `.bss` (`0x120000`), string pool (`0x160000`), and stack (`0x1f0000`).
    - Defines `CC_Real` (128-bit unpacked BCD floating-point value: `s` sign/status, `e` exponent, `m` 64-bit 16-nibble BCD mantissa) and named `.rodata` mathematical constants (`CC_0`, `CC_1`, `CC_PI`, `CC_100`, etc.).
    - Implements state file serialization (`readStateFile` / `writeStateFile`) to `<dataDir>/p`.
-2. [`BcdMathEngine.java`](file:///home/liberty/mp/android/classic_calc/app/src/main/java/org/liberty/android/classiccalc/engine/BcdMathEngine.java):
+2. [`BcdMathEngine.java`](file:///home/liberty/mp/android/ClassicCalc/app/src/main/java/org/liberty/android/classiccalc/engine/BcdMathEngine.java):
    - Core BCD nibble arithmetic (`dcbAddAdjust`, `dcbSubAdjust`, `dcbMul`, `dcbShiftRound`, `bintobcd`, `dcbtobin`).
    - Floating-point operations: `fadd`, `fradd`, `firadd`, `fmul`, `fdiv`, `fisqrt`, `_fmod`, `fPack`/`fUnpack`, rounding/truncation (`firnd`, `fitrunc`, `fiIP`, `fiFP`, `fifloor`, `ficeil`), comparisons (`fLT`, `fLE`, `fEQ`, `fNE`, `fZero`), and string conversions (`fStringToCC_er`, `fCCToString`).
-3. [`ScientificMathEngine.java`](file:///home/liberty/mp/android/classic_calc/app/src/main/java/org/liberty/android/classiccalc/engine/ScientificMathEngine.java):
+3. [`ScientificMathEngine.java`](file:///home/liberty/mp/android/ClassicCalc/app/src/main/java/org/liberty/android/classiccalc/engine/ScientificMathEngine.java):
    - Factorials (`fifact_L`), permutations/combinations (`fipermComb_L`), trigonometry (`fitrig`, `fiatrig`), hyperbolics (`fisincosh`, `fitanh`, `fiasinh`, `fiacosh`, `fiatanh`), logarithms and exponentials (`filn`, `flnp1`, `filog`, `fiexpm`), and powers/roots (`fpow`, `finthroot`).
-4. [`ProbabilityMathEngine.java`](file:///home/liberty/mp/android/classic_calc/app/src/main/java/org/liberty/android/classiccalc/engine/ProbabilityMathEngine.java):
+4. [`ProbabilityMathEngine.java`](file:///home/liberty/mp/android/ClassicCalc/app/src/main/java/org/liberty/android/classiccalc/engine/ProbabilityMathEngine.java):
    - Upper-tail normal distribution (`fiUTPN`), Student's $t$, $\chi^2$, and $F$-distribution cumulative probability functions.
-5. [`FinancialMathEngine.java`](file:///home/liberty/mp/android/classic_calc/app/src/main/java/org/liberty/android/classiccalc/engine/FinancialMathEngine.java):
+5. [`FinancialMathEngine.java`](file:///home/liberty/mp/android/ClassicCalc/app/src/main/java/org/liberty/android/classiccalc/engine/FinancialMathEngine.java):
    - TVM solvers (`TVMN`, `TVMI`, `TVMPV`, `TVMPMT`, `TVMFV`, `TVMAMORT`), cash flow analysis (`CFLO_NPV`, `CFLO_IRR`), bond pricing/yield (`BondPrice`, `BondYield`), depreciation (`DepSL`, `DepSOYD`, `DepDB`), date calculations (`DateDDays`, `DateDate`, `DateLeap`), percentages (`PartAsPercentOfTotal`, `MarkupAsPercentOfCost`, `MarkupAsPercentOfSale`), and `BreakEven`.
-6. [`StackAndStatsEngine.java`](file:///home/liberty/mp/android/classic_calc/app/src/main/java/org/liberty/android/classiccalc/engine/StackAndStatsEngine.java):
+6. [`StackAndStatsEngine.java`](file:///home/liberty/mp/android/ClassicCalc/app/src/main/java/org/liberty/android/classiccalc/engine/StackAndStatsEngine.java):
    - RPN/ALG stack manipulation (`Stack_GetX`, `Stack_SetX`, `Stack_InsertToX`, `Stack_SwapXY`, `Stack_RotateDownOneStep`), storage registers, cash flow list storage, and statistical accumulation/regression.
-7. [`DisplayAndKeypadEngine.java`](file:///home/liberty/mp/android/classic_calc/app/src/main/java/org/liberty/android/classiccalc/engine/DisplayAndKeypadEngine.java):
+7. [`DisplayAndKeypadEngine.java`](file:///home/liberty/mp/android/ClassicCalc/app/src/main/java/org/liberty/android/classiccalc/engine/DisplayAndKeypadEngine.java):
    - Virtual LCD character buffer (`g_ResultStub`) and 11-byte annunciator array (`g_StatusIndicators`), keypad shift translation (`Com_KeypadTranslate` for `f`/`g` prefixes), state machine checks (`ComKeyCheckState`), and `sysMainLoop`.
-8. [`AlgebraicBasicEngine.java`](file:///home/liberty/mp/android/classic_calc/app/src/main/java/org/liberty/android/classiccalc/engine/AlgebraicBasicEngine.java):
+8. [`AlgebraicBasicEngine.java`](file:///home/liberty/mp/android/ClassicCalc/app/src/main/java/org/liberty/android/classiccalc/engine/AlgebraicBasicEngine.java):
    - Digit entry buffer (`g_basic_edit`), `STO`/`RCL`/`GTO` multi-key sequences (`Basic_StoProcess`, `Basic_RclProcess`), and Algebraic/RPN expression evaluation.
-9. [`ProgramEngine.java`](file:///home/liberty/mp/android/classic_calc/app/src/main/java/org/liberty/android/classiccalc/engine/ProgramEngine.java):
+9. [`ProgramEngine.java`](file:///home/liberty/mp/android/ClassicCalc/app/src/main/java/org/liberty/android/classiccalc/engine/ProgramEngine.java):
    - Keystroke program memory, step encoding/decoding, single-step/back-step (`SST`/`BST`), and program execution loop (`Prog_Exec`).
-10. [`KeyHandlerEngine.java`](file:///home/liberty/mp/android/classic_calc/app/src/main/java/org/liberty/android/classiccalc/engine/KeyHandlerEngine.java):
+10. [`KeyHandlerEngine.java`](file:///home/liberty/mp/android/ClassicCalc/app/src/main/java/org/liberty/android/classiccalc/engine/KeyHandlerEngine.java):
     - Top-level key-down and key-up handlers (`Base_HandleKeyDown`, `Base_HandleKeyUp`) for all calculator keys and shifted functions.
-11. [`CalcEngine.java`](file:///home/liberty/mp/android/classic_calc/app/src/main/java/org/liberty/android/classiccalc/engine/CalcEngine.java):
+11. [`CalcEngine.java`](file:///home/liberty/mp/android/ClassicCalc/app/src/main/java/org/liberty/android/classiccalc/engine/CalcEngine.java):
     - Public synchronized entry point exposing `keyPressed(int key, byte isKeyUp)`, `resetCalc()`, `swapDecimalSep()`, `saveCalcData()`, and `restoreCalcData()`.
 
 ---
@@ -193,10 +193,10 @@ The engine has a fast, parallelized JUnit 4 local JVM unit test suite under `app
 
 | Test Class | Coverage |
 | :--- | :--- |
-| [`NutEmulatorTest.java`](file:///home/liberty/mp/android/classic_calc/app/src/test/java/org/liberty/android/classiccalc/engine/NutEmulatorTest.java) | **11 tests**: CC 12C & CC 15C reset, RPN arithmetic (`+`, `-`, `×`, `÷`), `CHS`/`EEX`/`CLx`, stack `x≷y`, `STO`/`RCL`, `f`/`g` shift annunciators, TVM loan payment solver, 15C scientific functions ($\sqrt{x}, y^x, 1/x, \sin, \cos, \tan$), decimal separator swap, and state file save/restore. |
-| [`CalcMemoryAndBcdMathTest.java`](file:///home/liberty/mp/android/classic_calc/app/src/test/java/org/liberty/android/classiccalc/engine/CalcMemoryAndBcdMathTest.java) | **9 tests**: `CalcMemory` 8/16/32/64-bit signed/unsigned loads and stores, C string/memory helpers (`strlen`, `strcpy`, `memcpy`, `memset`, `atoi`, `inttostr_t`), `.rodata` constant verification (`CC_0`, `CC_1`, `CC_N1`, `CC_100`, `CC_PI`), BCD integer/u64/nibble conversions, string parsing/formatting, `fPack`/`fUnpack` round-trip, BCD arithmetic, rounding/truncation (`fiIP`, `fiFP`, `firnd`, `fitrunc`, `fifloor`, `ficeil`, `fichs2`, `fiabs2`), and comparisons (`fLT`, `fLE`, `fEQ`, `fNE`, `fZero`, `fimax`, `fimin`, `fiInteger`, `fiParity`). |
-| [`ScientificAndFinancialMathTest.java`](file:///home/liberty/mp/android/classic_calc/app/src/test/java/org/liberty/android/classiccalc/engine/ScientificAndFinancialMathTest.java) | **8 tests**: Factorials (`fifact_L`), permutations & combinations (`fipermComb_L`), trigonometry & inverse trig (`fitrig`, `fiatrig`), hyperbolic & inverse hyperbolic functions (`fisincosh`, `fitanh`, `fiasinh`, `fiacosh`, `fiatanh`), logs/exponentials/powers/roots (`fiexpm`, `filn`, `filog`, `flnp1`, `fpow`, `finthroot`), normal distribution upper-tail probability (`fiUTPN`), TVM solvers (`TVMPMT`, `TVMPV`, `TVMN`, `TVMI`, `TVMFV`), percentages/markup/margin/break-even/leap-year, and RPN stack operations. |
-| [`CalcEngineIntegrationTest.java`](file:///home/liberty/mp/android/classic_calc/app/src/test/java/org/liberty/android/classiccalc/engine/CalcEngineIntegrationTest.java) | **11 tests**: End-to-end CC 12CP keystroke simulation across RPN mode, scientific keys ($1/x, y^x, \sqrt{x}, x^2, n!$), percentage keys (`%`, `Δ%`, `%T`), Algebraic (`ALG`) mode with parentheses, `STO`/`RCL` storage register arithmetic (`STO +`, `STO ×`), TVM workflow, Cash Flow (`NPV` & `IRR`), statistics ($\Sigma+$, $\bar{x}$, $s$), date `ΔDYS`, keystroke program recording/execution, decimal separator swap, and state persistence. |
+| [`NutEmulatorTest.java`](file:///home/liberty/mp/android/ClassicCalc/app/src/test/java/org/liberty/android/classiccalc/engine/NutEmulatorTest.java) | **11 tests**: CC 12C & CC 15C reset, RPN arithmetic (`+`, `-`, `×`, `÷`), `CHS`/`EEX`/`CLx`, stack `x≷y`, `STO`/`RCL`, `f`/`g` shift annunciators, TVM loan payment solver, 15C scientific functions ($\sqrt{x}, y^x, 1/x, \sin, \cos, \tan$), decimal separator swap, and state file save/restore. |
+| [`CalcMemoryAndBcdMathTest.java`](file:///home/liberty/mp/android/ClassicCalc/app/src/test/java/org/liberty/android/classiccalc/engine/CalcMemoryAndBcdMathTest.java) | **9 tests**: `CalcMemory` 8/16/32/64-bit signed/unsigned loads and stores, C string/memory helpers (`strlen`, `strcpy`, `memcpy`, `memset`, `atoi`, `inttostr_t`), `.rodata` constant verification (`CC_0`, `CC_1`, `CC_N1`, `CC_100`, `CC_PI`), BCD integer/u64/nibble conversions, string parsing/formatting, `fPack`/`fUnpack` round-trip, BCD arithmetic, rounding/truncation (`fiIP`, `fiFP`, `firnd`, `fitrunc`, `fifloor`, `ficeil`, `fichs2`, `fiabs2`), and comparisons (`fLT`, `fLE`, `fEQ`, `fNE`, `fZero`, `fimax`, `fimin`, `fiInteger`, `fiParity`). |
+| [`ScientificAndFinancialMathTest.java`](file:///home/liberty/mp/android/ClassicCalc/app/src/test/java/org/liberty/android/classiccalc/engine/ScientificAndFinancialMathTest.java) | **8 tests**: Factorials (`fifact_L`), permutations & combinations (`fipermComb_L`), trigonometry & inverse trig (`fitrig`, `fiatrig`), hyperbolic & inverse hyperbolic functions (`fisincosh`, `fitanh`, `fiasinh`, `fiacosh`, `fiatanh`), logs/exponentials/powers/roots (`fiexpm`, `filn`, `filog`, `flnp1`, `fpow`, `finthroot`), normal distribution upper-tail probability (`fiUTPN`), TVM solvers (`TVMPMT`, `TVMPV`, `TVMN`, `TVMI`, `TVMFV`), percentages/markup/margin/break-even/leap-year, and RPN stack operations. |
+| [`CalcEngineIntegrationTest.java`](file:///home/liberty/mp/android/ClassicCalc/app/src/test/java/org/liberty/android/classiccalc/engine/CalcEngineIntegrationTest.java) | **11 tests**: End-to-end CC 12CP keystroke simulation across RPN mode, scientific keys ($1/x, y^x, \sqrt{x}, x^2, n!$), percentage keys (`%`, `Δ%`, `%T`), Algebraic (`ALG`) mode with parentheses, `STO`/`RCL` storage register arithmetic (`STO +`, `STO ×`), TVM workflow, Cash Flow (`NPV` & `IRR`), statistics ($\Sigma+$, $\bar{x}$, $s$), date `ΔDYS`, keystroke program recording/execution, decimal separator swap, and state persistence. |
 
 ### Running the Unit Tests
 

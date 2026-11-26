@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "classic_calc"
+rootProject.name = "ClassicCalc"
 include ':app'
