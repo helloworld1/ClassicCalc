@@ -20,7 +20,7 @@
     <string name="Version_Name">Version</string>
     <string name="Version_Code">Version Code</string>
     <string name="GitHub" translatable="false">GitHub</string>
-    <string name="github_url" translatable="false">https://github.com/helloworld1/classic-calc</string>
+    <string name="github_url" translatable="false">https://github.com/helloworld1/ClassicCalc</string>
     <string name="app_name">Classic Calc</string>
     <string name="status_bar_notification_info_overflow">999+</string>
 </resources>
